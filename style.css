@@ -1,0 +1,335 @@
+/* Cài đặt cơ bản */
+:root {
+    --primary-color: #ffcc00; /* Vàng đặc trưng Vdrone */
+    --dark-bg: #1a1a1a;
+    --text-light: #f4f6f9;
+    --bg-color: #f4f6f9;
+    --text-color: #333;
+    --section-bg: #fff;
+    --section-bg-alt: #f9f9f9;
+    --navbar-bg: rgba(26, 26, 26, 0.9);
+    --ui-panel-bg: rgba(255, 255, 255, 0.95);
+    --shadow-color: rgba(0,0,0,0.1);
+}
+
+.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --section-bg: #1e1e1e;
+    --section-bg-alt: #2a2a2a;
+    --navbar-bg: rgba(18, 18, 18, 0.95);
+    --ui-panel-bg: rgba(30, 30, 30, 0.95);
+    --shadow-color: rgba(0,0,0,0.3);
+}
+
+body, html { 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    scroll-behavior: smooth; /* Cuộn trang mượt mà */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 1. THANH ĐIỀU HƯỚNG (NAVBAR) */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    transition: background-color 0.3s ease;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.logo {
+    color: var(--primary-color);
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: transform 0.3s ease;
+}
+.logo:hover {
+    transform: scale(1.05);
+}
+.logo span { color: white; }
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.3s, transform 0.3s ease;
+    position: relative;
+}
+.nav-links li a:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.menu-toggle:hover {
+    color: var(--primary-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+.theme-toggle:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* 2. CÁC SECTION CỦA TRANG */
+section {
+    min-height: 100vh;
+    padding: 80px 20px 20px; /* Chừa chỗ cho navbar cố định */
+    box-sizing: border-box;
+}
+
+/* Phần Trang chủ chứa 3D Drone */
+#trang-chu {
+    position: relative;
+    padding: 0; /* Bỏ padding để 3D full màn hình */
+    background: linear-gradient(135deg, var(--bg-color) 0%, #e0e2e5 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100vh;
+    transition: background 0.3s ease;
+}
+
+.dark-mode #trang-chu {
+    background: linear-gradient(135deg, var(--bg-color) 0%, #2a2a2a 100%);
+}
+#canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Bảng điều khiển Drone */
+#ui-panel { 
+    position: relative; 
+    margin-bottom: 40px;
+    background: var(--ui-panel-bg); 
+    padding: 20px 30px; 
+    border-radius: 16px; 
+    box-shadow: 0 15px 35px var(--shadow-color), 0 5px 15px var(--shadow-color); 
+    text-align: center; 
+    z-index: 10; 
+    min-width: 300px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+#ui-panel h3 { margin: 0 0 15px 0; color: var(--text-color); font-weight: 700; }
+#ui-panel button { 
+    background: linear-gradient(135deg, var(--primary-color), #e6b800); 
+    color: #000; border: none; padding: 12px 20px; font-size: 16px;
+    font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; transition: all 0.3s ease;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    position: relative;
+    overflow: hidden;
+}
+#ui-panel button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+#ui-panel button:hover::before {
+    left: 100%;
+}
+#ui-panel button:hover { 
+    background: linear-gradient(135deg, #e6b800, var(--primary-color)); 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+.control-group { margin-top: 15px; text-align: left; }
+.control-group label { font-size: 14px; font-weight: 600; color: var(--text-color); display: block; margin-bottom: 8px;}
+input[type=range] { 
+    width: 100%; 
+    cursor: pointer; 
+    background: #ddd; 
+    height: 6px; 
+    border-radius: 3px; 
+    outline: none;
+}
+input[type=range]::-webkit-slider-thumb { 
+    appearance: none; 
+    width: 20px; 
+    height: 20px; 
+    background: var(--primary-color); 
+    border-radius: 50%; 
+    cursor: pointer; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+input[type=range]::-moz-range-thumb { 
+    width: 20px; 
+    height: 20px; 
+    background: var(--primary-color); 
+    border-radius: 50%; 
+    cursor: pointer; 
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Tiêu đề giới thiệu nổi trên 3D */
+.hero-text {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    z-index: 10;
+    pointer-events: none;
+    animation: fadeInUp 1s ease-out;
+}
+.hero-text h1 {
+    font-size: 3rem;
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 8px rgba(255,255,255,0.8), 0 0 20px rgba(0,0,0,0.1);
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+.hero-text p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    max-width: 500px;
+    text-shadow: 1px 1px 4px rgba(255,255,255,0.6);
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+/* Nội dung các phần khác */
+.content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--section-bg);
+    text-align: center;
+    padding: 100px 20px;
+    transition: background-color 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+.content-section:nth-child(even) { background-color: var(--section-bg-alt); }
+.content-section:hover {
+    background-color: var(--section-bg-alt);
+}
+.content-section h2 { 
+    font-size: 2.5rem; 
+    color: var(--text-color); 
+    margin-bottom: 20px; 
+    position: relative;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+.content-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 2px;
+    animation: slideIn 0.5s ease-out 0.5s both;
+}
+.content-section p { 
+    max-width: 800px; 
+    font-size: 1.1rem; 
+    line-height: 1.6; 
+    color: var(--text-color); 
+    margin: 0;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+/* Báo lỗi 3D */
+#error-msg { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff3cd; padding: 20px; border-radius: 8px; font-weight: bold; z-index: 100; }
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+    }
+    to {
+        width: 50px;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.content-section:hover h2 {
+    animation: pulse 1s infinite;
+}

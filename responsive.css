@@ -1,0 +1,179 @@
+/* Media Queries cho Điện thoại và Tablet */
+@media screen and (max-width: 768px) {
+    /* Navbar Responsive */
+    .navbar {
+        flex-direction: column;
+        padding: 10px 15px;
+        gap: 12px;
+    }
+    
+    .logo {
+        font-size: 24px;
+    }
+
+    .nav-controls {
+        align-self: flex-end;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--navbar-bg);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 15px;
+        box-shadow: 0 5px 15px var(--shadow-color);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        text-align: center;
+    }
+
+    .nav-links li a {
+        font-size: 14px;
+        padding: 10px 0;
+        display: block;
+    }
+
+    /* Hero Text Responsive */
+    .hero-text {
+        top: 15%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+        margin: 0 auto;
+    }
+
+    /* UI Panel Mobile */
+    #ui-panel {
+        width: 90%;
+        min-width: auto;
+        padding: 15px 20px;
+        margin-bottom: 25px;
+        position: relative;
+        bottom: auto;
+        margin-top: 20px;
+    }
+
+    #ui-panel h3 {
+        font-size: 1.2rem;
+    }
+
+    #ui-panel button {
+        padding: 12px 15px;
+        font-size: 15px;
+        width: 100%;
+    }
+
+    /* Content Sections Mobile */
+    .content-section {
+        padding: 60px 15px 20px;
+    }
+
+    .content-section h2 {
+        font-size: 2rem;
+    }
+
+    .content-section p {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+
+    /* Reduce animations on mobile for performance */
+    .hero-text,
+    .hero-text h1,
+    .hero-text p,
+    #ui-panel,
+    .content-section,
+    .content-section h2,
+    .content-section p {
+        animation-duration: 0.5s;
+        animation-delay: 0s;
+    }
+
+    .content-section h2::after {
+        animation-duration: 0.3s;
+        animation-delay: 0.2s;
+    }
+}
+
+/* Responsive cho thiết bị màn hình rất nhỏ (nhỏ hơn 480px) */
+@media screen and (max-width: 480px) {
+    .hero-text {
+        top: 18%;
+    }
+
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links li a {
+        font-size: 13px;
+    }
+
+    #ui-panel {
+        width: 95%;
+        padding: 12px 15px;
+    }
+
+    #ui-panel h3 {
+        font-size: 1.1rem;
+    }
+
+    #ui-panel button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .control-group label {
+        font-size: 13px;
+    }
+
+    .content-section {
+        padding: 50px 10px 15px;
+    }
+
+    .content-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .content-section p {
+        font-size: 0.95rem;
+    }
+
+    /* Disable heavy animations on very small screens */
+    .content-section:hover h2 {
+        animation: none;
+    }
+
+    #ui-panel button::before {
+        display: none;
+    }
+}
